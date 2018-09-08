@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Table, Grid, Row, Col} from 'react-bootstrap';
 import peoples from './people.js';
+import SearchPairs from "./SearchPairs";
 
 
 class App extends Component {
@@ -25,8 +26,8 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <Grid className="peopleList">
-                    <Row className="show-grid">
+                <Grid>
+                    <Row className="show-grid peopleList">
                         <Col xs={4} md={8} lg={12}>
                             <Table striped bordered condensed hover>
                                 <thead>
@@ -44,6 +45,11 @@ class App extends Component {
                                 {this.drawPeople()}
                                 </tbody>
                             </Table>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs={4} md={8} lg={12}>
+                        <SearchPairs />
                         </Col>
                     </Row>
                 </Grid>
