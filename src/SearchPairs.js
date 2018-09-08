@@ -10,9 +10,15 @@ class SearchPairs extends Component {
         const arrPair = [];
 
         for (let i=0; i<ppl.length; i++) {
-            for (let j=i+1; j<ppl.length; j++) {
-                if (ppl[i].age !== ppl[j].age && ppl[i].glasses !== ppl[j].glasses && ppl[i].team !== ppl[j].team) {
-                    arrPair.push(`${i} Pair: ${ppl[i].first_name} ${ppl[i].last_name} ${ppl[i].age} and ${ppl[j].first_name} ${ppl[j].last_name} ${ppl[j].age}`);
+            for (let j=1; j<ppl.length; j++) {
+                if (ppl[i].age !== ppl[j].age &&
+                    ppl[i].glasses !== ppl[j].glasses &&
+                    ppl[i].team !== ppl[j].team &&
+                    ppl[i].district !== ppl[j].district) {
+                    arrPair.push(
+                        `${i} Pair: ${ppl[i].first_name} ${ppl[i].last_name} ${ppl[i].age} ${ppl[i].team} ${ppl[i].district} 
+                        and
+                         ${ppl[j].first_name} ${ppl[j].last_name} ${ppl[j].age} ${ppl[j].team} ${ppl[j].district}`);
                 }
             }
         }
@@ -21,10 +27,11 @@ class SearchPairs extends Component {
 
 
     render() {
+        console.log(this.getPair())
         return (
             <div>
-                {this.getPair().map(thing => {
-                    return <div>${thing}<br /><br /></div>
+                {this.getPair().map((thing, i) => {
+                    return <div key={i}>${thing}<br /><br /></div>
                 })}
             </div>
         );
