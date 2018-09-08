@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.peopleList {
+  height: 400px;
+  overflow-y: auto;
+}
