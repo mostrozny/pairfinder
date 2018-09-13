@@ -20,23 +20,21 @@ class SearchPairs extends Component {
     getPair = () => {
         const ppl = peoples;
         const arrPair = [];
-      //  const secondPair = [];
+        //  const secondPair = [];
 
         for (let i=0; i<ppl.length; i++) {
             arrPair.push([i]);
             for (let j=1; j<ppl.length; j++) {
-                if (ppl[i].team !== ppl[j].team &&
-                    ppl[i].district !== ppl[j].district &&
-                   ppl[i].age !== ppl[j].age &&
-                    ppl[i].glasses !== ppl[j].glasses) {
+                if (ppl[i].district !== ppl[j].district &&
+                    ppl[i].age !== ppl[j].age &&
+                    ppl[i].glasses !== ppl[j].glasses &&
+                    ppl[i].team !== ppl[j].team) {
                     arrPair[i].push(ppl[j].id);
                 }
 
             }
         }
-
         arrPair.sort(this.compareNumbers);
-        console.log(arrPair);
         return arrPair;
     };
 
@@ -48,10 +46,11 @@ class SearchPairs extends Component {
             for (let j=1; j<arrayPossiblePairs[i].length; j++) {
                 if (usedIds.indexOf(arrayPossiblePairs[i][j]) === -1) {
 
-                usedIds.push(arrayPossiblePairs[i][j]);
-                    secondMan.push(arrayPossiblePairs[i][j]);
-            
-               }
+                    usedIds.push(arrayPossiblePairs[i][j]);
+                    if (usedIds.indexOf(arrayPossiblePairs[i][0]) === -1) {
+                        secondMan.push(arrayPossiblePairs[i][j]);
+                    }
+                }
             }
         }
         console.log(usedIds)
@@ -71,12 +70,13 @@ class SearchPairs extends Component {
         for (let i=0; i<firstman.length; i++) {
             if (used.indexOf(secondman[i]) === -1 && used.indexOf(firstman[i][0])  === -1) {
                 console.log(secondman[i] + " " + firstman[i][0]);
-                pair.push([firstman[i][0], secondman[i]]);
+                pair.push([secondman[i], firstman[i][0]]);
             }
             used.push(firstman[i][0]);
             used.push(secondman[i]);
 
         }
+        //  console.log(used.indexOf(secondman[i]) === -1 )
         return pair;
     }
 
@@ -92,10 +92,12 @@ class SearchPairs extends Component {
     }
 
     render() {
+        console.log(this.state.firstMan);
+        console.log(this.getPairs());
         return (
             <div>
                 {this.getPairs().slice().map((thing) => {
-                  return  <div>{thing[0]}---{thing[1]} <br /></div>
+                    return  <div>{thing[0]}---{thing[1]} <br /></div>
                 })}
             </div>
         )
